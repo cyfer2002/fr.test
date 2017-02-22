@@ -1,0 +1,58 @@
+extend default
+
+block content
+  .contact
+    .container
+      .contact-form
+        .bg
+        h2 Contact
+        address
+          strong #{companyName} - Nicolas VATIN
+          span.visible-xs
+            br
+            | CHRU de Besançon
+          br
+          | <a href="tel:+33381218955">(+33) 3 81 21 89 55</a>
+          br
+          | <a href="mailto:nvatin@chu-besancon.fr">nvatin@chu-besancon.fr</a>
+
+        form(action="/contact" method="post" accept-charset="UTF-8" novalidate="novalidate")
+          - if (success)
+            .alert.alert-success.message-sent
+              button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") &times;
+              | #{success}
+          - if (errors.error)
+            .alert.alert-danger.message-error
+              button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") &times;
+              | #{errors.error}
+          .form-group(class=(errors.name ? "has-error" : ""))
+            input.form-control(type="text" name="name" placeholder="Nom complet" autofocus="1" value=params.name)
+            - if (errors.name)
+              span.help-block #{errors.name}
+          .form-group(class=(errors.email ? "has-error" : ""))
+            input.form-control(type="email" name="email" placeholder="Email" value=params.email)
+            - if (errors.email)
+              span.help-block #{errors.email}
+          .form-group(class=(errors.origin ? "has-error" : ""))
+            select(name="origin").form-control
+              option(value="") - Comment m'avez-vous trouvé ? -
+              option(value="internet" selected='internet' === params.origin) Via internet
+              option(value="friend" selected='friend' === params.origin) Via un ami
+              option(value="other" selected='other' === params.origin) Autre
+            - if (errors.origin)
+              span.help-block #{errors.origin}
+          .form-group(class=(errors.message ? "has-error" : ""))
+            label(for="message") Message&nbsp;
+            textarea.form-control(name="message" id="message" rows="4")
+              | #{params.message}
+            - if (errors.message)
+              span.help-block #{errors.message}
+
+          .captcha-wrapper
+            != captcha
+          button.btn.btn-primary(type="submit")
+            .fa.fa-spinner.fa-pulse
+            | Envoyer
+          .clearfix

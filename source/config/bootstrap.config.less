@@ -1,0 +1,44 @@
+@import '../../node_modules/bootstrap/less/variables.less';
+
+@brand-primary: #303641;
+
+.carousel-control {
+  // Toggles
+  .fa-chevron-left,
+  .fa-chevron-right {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    z-index: 5;
+    display: inline-block;
+  }
+  .fa-chevron-left {
+    left: 50%;
+    margin-left: -10px;
+  }
+  .fa-chevron-right {
+    right: 50%;
+    margin-right: -10px;
+  }
+}
+
+// Scale up controls for tablets and up
+@media screen and (min-width: @screen-sm-min) {
+
+  // Scale up the controls a smidge
+  .carousel-control {
+    .fa-chevron-left,
+    .fa-chevron-right {
+      width: (@carousel-control-font-size * 1.5);
+      height: (@carousel-control-font-size * 1.5);
+      margin-top: (@carousel-control-font-size / -2);
+      font-size: (@carousel-control-font-size * 1.5);
+    }
+    .fa-chevron-left {
+      margin-left: (@carousel-control-font-size / -2);
+    }
+    .fa-chevron-right {
+      margin-right: (@carousel-control-font-size / -2);
+    }
+  }
+}

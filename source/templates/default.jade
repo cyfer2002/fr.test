@@ -5,13 +5,13 @@ html
     title Soirée Badminton
   body
     .header
-      h1.page-title Soirée Badminton
+      h1.page-title #{title}
 
     ul.nav
       li: a(href='/') Home
       li: a(href='#news') News
       li: a(href='#about') About
-      li: a(href='#contact') Contact
+      li: a(href='/contact') Contact
     
     .main-content
       block content
