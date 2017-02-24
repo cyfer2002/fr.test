@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200,700");
+.contact h2 {
+  margin: 0 0 10px;
+}
+.contact a {
+  text-decoration: underline;
+}
+.contact a:hover {
+  text-decoration: none;
+}
+.contact .container {
+  position: relative;
+}
+.contact .contact-form {
+  position: relative;
+  z-index: 20;
+  width: 550px;
+  max-width: 100%;
+  padding: 30px;
+  margin-top: 30px;
+}
+.contact .contact-form .bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  opacity: 0.85;
+  border-radius: 15px;
+  z-index: -1;
+}
+.contact .contact-form [type="submit"] {
+  float: right;
+  width: 170px;
+  height: 56px;
+}
+.contact .contact-form [type="submit"]:hover {
+  text-decoration: underline;
+}
+.contact .contact-form [type="submit"] .fa {
+  margin-right: 10px;
+}
+.contact .contact-form [type="submit"]:enabled .fa {
+  display: none;
+}
+.contact .captcha-wrapper {
+  overflow: hidden;
+  float: left;
+  height: 56px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.contact .captcha-wrapper .g-recaptcha {
+  position: relative;
+  top: -9px;
+  left: -1px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Source Code Pro', monospace;
+}
+.header {
+  background: url("http://aschbadminton.e-monsite.com/medias/static/themes/showroom_bootstrap/sport_badminton/badminton.jpg");
+  background-position: center;
+}
+.header .page-title {
+  font-weight: 200;
+  font-size: 80px;
+  text-align: center;
+  padding: 100px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.nav {
+  background: #000;
+  text-align: center;
+}
+.nav li {
+  display: inline-block;
+}
+.nav a {
+  display: inline-block;
+  padding: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+.nav a:hover {
+  background-color: #3ab795;
+  text-decoration: underline;
+}
+.main-content {
+  margin: 50px auto;
+  max-width: 600px;
+}
+.main-content p {
+  line-height: 1.6;
+  margin-bottom: 1.7em;
+}
+.footer {
+  margin: 50px auto;
+  max-width: 600px;
+  border-top: 1px solid #444;
+  padding: 20px 0;
+}
+.footer p {
+  color: #444;
+  font-size: 12px;
+}
