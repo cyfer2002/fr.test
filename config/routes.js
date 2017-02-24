@@ -4,6 +4,7 @@ var config     = require('./config');
 var path       = require('path');
 var babel      = require('babel-core');
 var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 // Re Captcha configuration
 var recaptcha = require('express-recaptcha');
@@ -19,6 +20,12 @@ var transporter = nodemailer.createTransport('smtps://smartdog@gmx.fr:Mm2ppSDsf@
 router.get('/', function (req, res, next) {
   res.render('homepage', {
     title: config.title
+  });
+});
+
+router.get('/news', function (req, res, next) {
+  res.render('news', {
+    title: "News"
   });
 });
 
