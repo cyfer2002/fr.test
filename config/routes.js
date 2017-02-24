@@ -10,7 +10,7 @@ var recaptcha = require('express-recaptcha');
 recaptcha.init('6LfRgxYUAAAAAOBl7lYmn7XhlRB1gADhao1K0eAb', '6LfRgxYUAAAAAHm22ueVWynuS9xa1Hp9gDtNBLsV', { hl: 'fr' });
 
 // Import es6 file
-var checkContactForm = eval(babel.transformFileSync(path.join(__dirname, '../frontend/app/contact/check_form.es6'), {
+var checkContactForm = eval(babel.transformFileSync(path.join(__dirname, '../source/app/contact/check_form.es6'), {
   presets: ['es2015']
 }).code);
 
@@ -64,8 +64,7 @@ router.post('/contact', recaptcha.middleware.verify, function(req, res, next) {
     from: config.company.replyEmail,
     to:   config.company.email,
     subject: req.body.name + " vous a envoyé un message",
-    html: ("<a href='mailto:" + req.body.email + "'>" + req.body.name + "</a> (" +
-    ORIGINS[req.body.origin] + ") :\n\n" + req.body.message).replace(/\n/g, '<br />')
+    html: ("<a href='mailto:" + req.body.email + "'>" + req.body.name + "</a> ( Message ) :\n\n" + req.body.message).replace(/\n/g, '<br />')
   };
 
   // send mail with defined transport object

@@ -11,9 +11,6 @@ export default function checkForm(inputs) {
   } else if (!REG_EMAIL.test(inputs.email)) {
     errors.email = 'Addresse email invalide';
   }
-  if (!inputs.origin.trim()) {
-    errors.origin = 'Ce champ est requis';
-  }
   if (!inputs.message.trim()) {
     errors.message = 'Ce champ est requis';
   }

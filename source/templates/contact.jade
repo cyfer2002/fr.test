@@ -7,7 +7,7 @@ block content
         .bg
         h2 Contact
         address
-          strong #{companyName} - Nicolas VATIN
+          strong #{companyName} Nicolas VATIN
           span.visible-xs
             br
             | CHRU de Besançon
@@ -35,14 +35,6 @@ block content
             input.form-control(type="email" name="email" placeholder="Email" value=params.email)
             - if (errors.email)
               span.help-block #{errors.email}
-          .form-group(class=(errors.origin ? "has-error" : ""))
-            select(name="origin").form-control
-              option(value="") - Comment m'avez-vous trouvé ? -
-              option(value="internet" selected='internet' === params.origin) Via internet
-              option(value="friend" selected='friend' === params.origin) Via un ami
-              option(value="other" selected='other' === params.origin) Autre
-            - if (errors.origin)
-              span.help-block #{errors.origin}
           .form-group(class=(errors.message ? "has-error" : ""))
             label(for="message") Message&nbsp;
             textarea.form-control(name="message" id="message" rows="4")
