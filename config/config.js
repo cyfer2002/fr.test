@@ -6,6 +6,6 @@ config.company = {
   email:  "nvatin@chu-besancon.fr",
   phone: "(+33) 3 81 21 89 55"
 };
-config.replyEmail   =  config.companyName + " <nvatin@chu-besancon.fr>";
+config.replyEmail   =  config.companyName + " <sport-chru@gmx.fr>";
 
 module.exports = config;

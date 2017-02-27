@@ -15,7 +15,7 @@ var checkContactForm = eval(babel.transformFileSync(path.join(__dirname, '../sou
   presets: ['es2015']
 }).code);
 
-var transporter = nodemailer.createTransport('smtps://smartdog@gmx.fr:Mm2ppSDsf@mail.gmx.net');
+var transporter = nodemailer.createTransport('smtps://sport-chru@gmx.fr:Mm2ppBCsf@mail.gmx.com');
 
 router.get('/', function (req, res, next) {
   res.render('homepage', {
