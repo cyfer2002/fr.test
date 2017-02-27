@@ -2,9 +2,11 @@ var express = require('express')
   , logger = require('morgan');
 var session = require('client-sessions');
 var path = require('path');
+var fs = require('fs');
 var routes = require('./config/routes');
 var config = require('./config/config');
 var bodyParser = require('body-parser');
+var _ = require('lodash');
 var app = express();
 
 app.set('views', path.join(__dirname, 'source/templates'));
