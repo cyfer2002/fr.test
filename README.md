@@ -1,1 +1,1 @@
-"# BadmintonCHRUNode2"
+"# BadmintonCHRUNode"
