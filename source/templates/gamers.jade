@@ -1,0 +1,16 @@
+extend default
+
+block content
+  p.
+    Liste des participants
+  table.table.table-striped
+    tbody
+      tr
+        td Id
+        td Nom
+        td Prénom
+      each gamer in gamers
+        tr
+          td #{gamer.id}
+          td #{gamer.name}
+          td #{gamer.lastname}
