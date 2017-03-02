@@ -17,6 +17,8 @@ import ContactForm from './app/contact/contact_form';
 
 $(() => {
   new ContactForm($('.contact-form form'));
+  new PopupForm($('.popup-form form'));
+  new LoginForm($('.login-form form'));
 
 
   // Menu

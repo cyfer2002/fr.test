@@ -18,8 +18,14 @@ var checkContactForm = eval(babel.transformFileSync(path.join(__dirname, '../sou
 var transporter = nodemailer.createTransport('smtps://sport-chru@gmx.fr:Mm2ppBCsf@mail.gmx.com');
 
 router.get('/', function (req, res, next) {
+  var success = req.session.success;
+  var errors = req.session.errors || {};
+  var params = req.session.params || {};
   res.render('homepage', {
-    title: config.title
+    title: config.title,
+    params: params,
+    success: success,
+    errors: errors
   });
 });
 
@@ -91,4 +97,5 @@ router.post('/contact', recaptcha.middleware.verify, function(req, res, next) {
   req.session.success = message;
   return res.redirect('/contact');
 });
+
 module.exports = router;

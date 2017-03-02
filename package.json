@@ -46,6 +46,7 @@
     "nib": "^1.1.2",
     "node-sass": "3.6.0",
     "nodemailer": "^2.3.2",
+    "pg": "^6.1.2",
     "pug": "^2.0.0-alpha6",
     "python": "0.0.4",
     "resolve-url-loader": "1.4.2",

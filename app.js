@@ -4,6 +4,7 @@ var session = require('client-sessions');
 var path = require('path');
 var fs = require('fs');
 var routes = require('./config/routes');
+var gamers = require('./config/models/gamers');
 var config = require('./config/config');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/static'));
 app.use('/', routes);
+app.use('/gamers/', gamers);
 
 // Redirect jquery, bootstrap, font-awesome
 app.use('/images', express.static(__dirname + '/source/images'));
@@ -56,6 +58,7 @@ if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
+      title: err.message,
       message: err.message,
       error: err
     });
@@ -67,6 +70,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
+    title: err.message,
     message: err.message,
     error: {}
   });
