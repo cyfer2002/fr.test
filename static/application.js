@@ -66,6 +66,14 @@
 	
 	var _contact_form2 = _interopRequireDefault(_contact_form);
 	
+	var _popup_form = __webpack_require__(311);
+	
+	var _popup_form2 = _interopRequireDefault(_popup_form);
+	
+	var _login_form = __webpack_require__(313);
+	
+	var _login_form2 = _interopRequireDefault(_login_form);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// Font-awesome
@@ -74,8 +82,8 @@
 	// Bootstrap
 	(0, _expose$ExposeJQueryJquery2.default)(function () {
 	  new _contact_form2.default((0, _expose$ExposeJQueryJquery2.default)('.contact-form form'));
-	  new PopupForm((0, _expose$ExposeJQueryJquery2.default)('.popup-form form'));
-	  new LoginForm((0, _expose$ExposeJQueryJquery2.default)('.login-form form'));
+	  new _popup_form2.default((0, _expose$ExposeJQueryJquery2.default)('.popup-form form'));
+	  new _login_form2.default((0, _expose$ExposeJQueryJquery2.default)('.login-form form'));
 	
 	  // Menu
 	  (0, _expose$ExposeJQueryJquery2.default)('.navbar').on('click', ' .dropdown-menu a', function () {
@@ -18401,6 +18409,386 @@
 	    this._display(type, message, parent);
 	  };
 	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(274)))
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _check_form = __webpack_require__(312);
+	
+	var _check_form2 = _interopRequireDefault(_check_form);
+	
+	var _flash = __webpack_require__(310);
+	
+	var _flash2 = _interopRequireDefault(_flash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ERROR_CLASS = 'has-error';
+	
+	var PopupForm = function () {
+	  function PopupForm(form) {
+	    var _this = this;
+	
+	    _classCallCheck(this, PopupForm);
+	
+	    this.$form = $(form);
+	    if (!this.$form.length) return;
+	
+	    this.$inputs = 'nameTeam'.split(' ').reduce(function (h, inputName) {
+	      h[inputName] = _this.$form.find('[name="' + inputName + '"]');
+	      return h;
+	    }, {});
+	
+	    this.$form.find('.message-sent, .message-error').delay(5000).fadeOut(400);
+	    this.$form.on('submit', function (e) {
+	      return _this.onSubmit(e);
+	    });
+	  }
+	
+	  _createClass(PopupForm, [{
+	    key: 'resetErrors',
+	    value: function resetErrors() {
+	      this.$form.find('.form-group').removeClass(ERROR_CLASS).end().find('.help-block').remove();
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(e) {
+	      var _this2 = this;
+	
+	      // Stop submit event
+	      e.preventDefault();
+	
+	      // Remove errors from previous submit call
+	      this.resetErrors();
+	
+	      // Check if user filled the form correctly
+	      var errors = (0, _check_form2.default)(this.inputValues);
+	
+	      // Error found
+	      if (Object.keys(errors).length) {
+	        // Display errors
+	        for (var inputName in errors) {
+	          this.displayInputError(inputName, errors[inputName]);
+	        }
+	        // Give focus to the first input with an error
+	        return this.$form.find('.has-error:first').find('input,select,textarea').focus();
+	      }
+	
+	      // Display spinner
+	      var $button = this.$form.find('[type="submit"]').prop('disabled', true);
+	
+	      // Ajax call
+	      $.ajax({
+	        url: this.$form.attr('action'),
+	        method: this.$form.attr('method'),
+	        data: this.$form.serialize(),
+	        dataType: 'JSON',
+	        success: function success(data) {
+	          if (data.error) {
+	            _flash2.default.danger(data.error, _this2.$form);
+	          }
+	          if (data.message) {
+	            _flash2.default.success(data.message, _this2.$form);
+	            _this2.$form[0].reset();
+	          }
+	        },
+	        complete: function complete() {
+	          $button.prop('disabled', false);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'displayInputError',
+	    value: function displayInputError(inputName, error) {
+	      this.$inputs[inputName].closest('.form-group').addClass(ERROR_CLASS).end() // Add class on form-group element
+	      .after($('<span>', { class: 'help-block' }).text(error)); // Add an help-block element with the error desc
+	    }
+	  }, {
+	    key: 'inputValues',
+	    get: function get() {
+	      var values = {};
+	      for (var inputName in this.$inputs) {
+	        values[inputName] = this.$inputs[inputName].val();
+	      }
+	      return values;
+	    }
+	  }]);
+	
+	  return PopupForm;
+	}();
+	
+	exports.default = PopupForm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(274)))
+
+/***/ },
+/* 312 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = checkForm;
+	function checkForm(inputs) {
+	  var errors = {};
+	  if (!inputs.nameTeam.trim()) {
+	    errors.nameTeam = 'Ce champ est requis';
+	  }
+	  return errors;
+	}
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _check_form = __webpack_require__(314);
+	
+	var _check_form2 = _interopRequireDefault(_check_form);
+	
+	var _replaceflash = __webpack_require__(315);
+	
+	var _replaceflash2 = _interopRequireDefault(_replaceflash);
+	
+	var _flash = __webpack_require__(310);
+	
+	var _flash2 = _interopRequireDefault(_flash);
+	
+	var _loginuser = __webpack_require__(316);
+	
+	var _loginuser2 = _interopRequireDefault(_loginuser);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ERROR_CLASS = 'has-error';
+	
+	var LoginForm = function () {
+	  function LoginForm(form) {
+	    var _this = this;
+	
+	    _classCallCheck(this, LoginForm);
+	
+	    this.$form = $(form);
+	    if (!this.$form.length) return;
+	
+	    this.$inputs = 'username password'.split(' ').reduce(function (h, inputName) {
+	      h[inputName] = _this.$form.find('[name="' + inputName + '"]');
+	      return h;
+	    }, {});
+	
+	    this.$form.find('.message-sent, .message-error').delay(5000).fadeOut(400);
+	    this.$form.on('submit', function (e) {
+	      return _this.onSubmit(e);
+	    });
+	  }
+	
+	  _createClass(LoginForm, [{
+	    key: 'resetErrors',
+	    value: function resetErrors() {
+	      this.$form.find('.form-group').removeClass(ERROR_CLASS).end().find('.help-block').remove();
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(e) {
+	      var _this2 = this;
+	
+	      // Stop submit event
+	      e.preventDefault();
+	
+	      // Remove errors from previous submit call
+	      this.resetErrors();
+	
+	      // Check if user filled the form correctly
+	      var errors = (0, _check_form2.default)(this.inputValues);
+	
+	      // Error found
+	      if (Object.keys(errors).length) {
+	        // Display errors
+	        for (var inputName in errors) {
+	          this.displayInputError(inputName, errors[inputName]);
+	        }
+	        // Give focus to the first input with an error
+	        return this.$form.find('.has-error:first').find('input,select,textarea').focus();
+	      }
+	
+	      // Display spinner
+	      var $button = this.$form.find('[type="submit"]').prop('disabled', true);
+	
+	      // Ajax call
+	      $.ajax({
+	        url: this.$form.attr('action'),
+	        method: this.$form.attr('method'),
+	        data: this.$form.serialize(),
+	        dataType: 'JSON',
+	        success: function success(data) {
+	          if (data.error) {
+	            _flash2.default.danger(data.error, _this2.$form);
+	          }
+	          if (data.message) {
+	            _replaceflash2.default.success(data.message, _this2.$form);
+	            _this2.$form[0].reset();
+	            _loginuser2.default._display(data.user.username, $('[data-target="#login"]'));
+	            setTimeout(function () {
+	              $('.modal').modal('hide');
+	            }, 500);
+	          }
+	        },
+	        complete: function complete() {
+	          $button.prop('disabled', false);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'displayInputError',
+	    value: function displayInputError(inputName, error) {
+	      this.$inputs[inputName].closest('.form-group').addClass(ERROR_CLASS).end() // Add class on form-group element
+	      .after($('<span>', { class: 'help-block' }).text(error)); // Add an help-block element with the error desc
+	    }
+	  }, {
+	    key: 'inputValues',
+	    get: function get() {
+	      var values = {};
+	      for (var inputName in this.$inputs) {
+	        values[inputName] = this.$inputs[inputName].val();
+	      }
+	      return values;
+	    }
+	  }]);
+	
+	  return LoginForm;
+	}();
+	
+	exports.default = LoginForm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(274)))
+
+/***/ },
+/* 314 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = checkForm;
+	function checkForm(inputs) {
+	  var errors = {};
+	  if (!inputs.username.trim()) {
+	    errors.username = 'Ce champ est requis';
+	  }
+	  if (!inputs.password.trim()) {
+	    errors.password = 'Ce champ est requis';
+	  }
+	  return errors;
+	}
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ALERT_TYPES = ["success", "info", "warning", "danger"];
+	
+	var ReplaceFlash = function () {
+	  function ReplaceFlash() {
+	    _classCallCheck(this, ReplaceFlash);
+	  }
+	
+	  _createClass(ReplaceFlash, null, [{
+	    key: "element",
+	    value: function element(parent) {
+	      var $parent = $(parent);
+	      return $parent.length ? $parent : $('body .container:first');
+	    }
+	  }, {
+	    key: "_display",
+	    value: function _display(type, message, parent) {
+	      var html = "\n      <div class=\"alert fade in alert-" + type + "\">\n        " + message + "\n      </div>";
+	      (parent ? $(parent) : this.element()).replaceWith($(html).delay(5000));
+	    }
+	  }]);
+	
+	  return ReplaceFlash;
+	}();
+	
+	exports.default = ReplaceFlash;
+	
+	
+	ALERT_TYPES.forEach(function (type) {
+	  ReplaceFlash[type] = function (message, parent) {
+	    this._display(type, message, parent);
+	  };
+	});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(274)))
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var LoginUser = function () {
+	  function LoginUser() {
+	    _classCallCheck(this, LoginUser);
+	  }
+	
+	  _createClass(LoginUser, null, [{
+	    key: 'element',
+	    value: function element(parent) {
+	      var $parent = $(parent);
+	      return $parent.length ? $parent : $('body .container:first');
+	    }
+	  }, {
+	    key: '_display',
+	    value: function _display(username, parent) {
+	      var html = '\n    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="menu-item-login"> ' + username + ' &nbsp;\n      <span class="caret"></span></a>\n    <ul class="dropdown-menu" aria-labelledby="menu-item-login">\n      <li>\n        <a href=\'#\'>Profile</a>\n      </li>\n      <li>\n        <a href=\'/logOut\'>Deconnexion</a> \n      </li>\n    </ul>\n    ';
+	      (parent ? $(parent) : this.element()).replaceWith($(html));
+	    }
+	  }]);
+	
+	  return LoginUser;
+	}();
+	
+	exports.default = LoginUser;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(274)))
 
 /***/ }

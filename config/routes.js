@@ -4,7 +4,12 @@ var config     = require('./config');
 var path       = require('path');
 var babel      = require('babel-core');
 var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
+var passport = require('passport');
+
+// Passport initialize
+router.use(passport.initialize());
+router.use(passport.session());
+
 
 // Re Captcha configuration
 var recaptcha = require('express-recaptcha');
@@ -21,17 +26,27 @@ router.get('/', function (req, res, next) {
   var success = req.session.success;
   var errors = req.session.errors || {};
   var params = req.session.params || {};
+  var user = req.user;
   res.render('homepage', {
     title: config.title,
     params: params,
     success: success,
-    errors: errors
+    errors: errors,
+    user: user
   });
 });
 
 router.get('/news', function (req, res, next) {
+  var success = req.session.success;
+  var errors = req.session.errors || {};
+  var params = req.session.params || {};
+  var user = req.user;
   res.render('news', {
-    title: "News"
+    title: "News",
+    params: params,
+    success: success,
+    errors: errors,
+    user: user
   });
 });
 
@@ -39,7 +54,8 @@ router.get('/contact', recaptcha.middleware.render, function(req, res, next) {
   var success = req.session.success;
   var errors = req.session.errors || {};
   var params = req.session.params || {};
-  req.session.reset();
+  var user = req.user;
+//  req.session.reset();
   
   res.render('contact', {
     title: 'Contact',
@@ -47,6 +63,7 @@ router.get('/contact', recaptcha.middleware.render, function(req, res, next) {
     params: params,
     success: success,
     errors: errors,
+    user: user,
     captcha: req.recaptcha
   });
 });
@@ -96,6 +113,41 @@ router.post('/contact', recaptcha.middleware.verify, function(req, res, next) {
   // HTML request
   req.session.success = message;
   return res.redirect('/contact');
+});
+
+/* POST Login verification. */
+router.post('/login',
+  passport.authenticate('local', {
+    successRedirect : '/loginSuccess',
+    failureRedirect: '/loginFailure',
+    failureFlash: true
+  }));
+
+
+/* POST LogOut page. */
+router.get('/logOut', function (req, res, next) {
+  req.logout();
+  res.redirect('/');
+});
+
+router.get('/signIn', function (req, res, next) {
+  res.render('signIn');
+});
+
+/* POST Login Failure. */
+router.get('/loginFailure', function(req, res, next) {
+  res.send({
+    error: 'Failed to authenticate'
+  });
+});
+
+/* POST Login Sucess. */
+router.get('/loginSuccess', function(req, res, next) {
+  console.log(req.user);
+  res.send( {
+    message: 'Successfully authenticated',
+    user: req.user
+  });
 });
 
 module.exports = router;

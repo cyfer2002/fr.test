@@ -68,8 +68,8 @@ html
                 input.form-control(type="password" name="password" placeholder="Mot de passe" autofocus="1" value=params.password)
                 - if (errors.login)
                   span.help-block #{errors.login}
-                  h6.italic
-                    a(href='/signIn') SignIn
+                h6.italic
+                  a(href='/signIn') SignIn
               button.btn.btn-primary(type="submit")
                 .fa.fa-spinner.fa-pulse
                 | Login

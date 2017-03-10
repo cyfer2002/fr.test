@@ -1,12 +1,18 @@
 var express    = require('express');
 var router     = express.Router();
 var pool = require('./database');
+var passport = require('passport');
+
+// Passport initialize
+router.use(passport.initialize());
+router.use(passport.session());
 
 /* GET gamers list. */
 router.get('/', function(req, res, next) {
   var success = req.session.success;
   var errors = req.session.errors || {};
   var params = req.session.params || {};
+  var user = req.user;
   var listGamers = [];
   var j = 0;
   var selectQuery = 'SELECT * FROM gamers';
@@ -28,7 +34,8 @@ router.get('/', function(req, res, next) {
           params: params,
           success: success,
           errors: errors,
-          gamers: listGamers
+          gamers: listGamers,
+          user: user
         });
     });
     sqlQuery.on("error", function(error) {
