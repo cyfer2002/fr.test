@@ -1,0 +1,9 @@
+extend default
+
+block content
+  .gallery
+    .thumbnails
+      each file in files
+        img(onmouseover="getElementById('preview').src=/images/photos/#{file}" name="#{file}" src="/images/photos/#{file}" alt="")
+    .preview
+      img(id=preview src ="/images/photos/#{files[1]}" alt="")

@@ -4,7 +4,9 @@ var config     = require('./config');
 var path       = require('path');
 var babel      = require('babel-core');
 var nodemailer = require('nodemailer');
-var passport = require('passport');
+var passport  = require('passport');
+var Gallery = require('node-gallery');
+var fs        = require('fs');
 
 // Passport initialize
 router.use(passport.initialize());
@@ -149,5 +151,31 @@ router.get('/loginSuccess', function(req, res, next) {
     user: req.user
   });
 });
+
+/* GET Picture page. */
+router.get('/pictures', function (req, res, next) {
+  var success = req.session.success;
+  var errors = req.session.errors || {};
+  var params = req.session.params || {};
+  var user = req.user;
+  var files = fs.readdirSync(path.join(__dirname, '../source/images/photos/'));
+  console.log(files);
+  
+  res.render('/gallery', {
+    title: "Galerie Photos",
+    params: params,
+    success: success,
+    errors: errors,
+    user: user,
+    files: files
+  });
+
+});
+
+var options = {
+  title: 'Photos Badminton Mars 2017'
+};
+router.use('/gallery', Gallery(path.join(__dirname, '../source/images/photos/'), options));
+
 
 module.exports = router;
