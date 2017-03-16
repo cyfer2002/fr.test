@@ -3,6 +3,7 @@ var express = require('express')
 var session = require('client-sessions');
 var path = require('path');
 var fs = require('fs');
+var static = require('serve-static');
 var routes = require('./config/routes');
 var gamers = require('./config/models/gamers');
 var pool = require('./config/models/database');
@@ -38,6 +39,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
     // Auth Check Logic
     var selectQuery = 'SELECT * FROM public."USERS" WHERE username = ($1)';
     var user;
+    var result = false;
     var cnx = pool.connect(function(err, cnx, done2){
       if(err) {
         return console.error('error fetching client from pool', err);
@@ -45,15 +47,20 @@ passport.use(new LocalStrategy(function(username, password, done) {
       var sqlQuery = cnx.query(selectQuery, [username]);
       sqlQuery.on("row", function(row) {
         user = row;
+        result = true;
       });
       sqlQuery.on("end", function() {
         done2();
-        if (!bcrypt.compareSync(password, user.password)) {
+        if (result) {
+          if (bcrypt.compareSync(password, user.password)) {
 //        if(password != user.password){
-          return done(null, false);
+            return done(null, user);
+          }
+          else return done(null, false);
         }
-        else return done(null, user);
-      });
+        else return done(null, false);
+        });
+
       sqlQuery.on("error", function(error) {
         return done(error);
       });
@@ -87,6 +94,8 @@ app.use('/gamers/', gamers);
 // Redirect jquery, bootstrap, font-awesome
 app.use('/images', express.static(__dirname + '/source/images'));
 app.use('/fonts', express.static(__dirname + '/source/fonts'));
+app.use('/photos', express.static(__dirname + '/source/images/photos'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -112,10 +121,18 @@ app.locals.moment = require('moment');
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
+    var success = req.session.success;
+    var errors = req.session.errors || {};
+    var params = req.session.params || {};
+    var user = req.user;
     res.status(err.status || 500);
     res.render('error', {
       title: err.message,
       message: err.message,
+      params: params,
+      success: success,
+      errors: errors,
+      user: user,
       error: err
     });
   });
@@ -124,10 +141,18 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+  var success = req.session.success;
+  var errors = req.session.errors || {};
+  var params = req.session.params || {};
+  var user = req.user;
   res.status(err.status || 500);
   res.render('error', {
     title: err.message,
     message: err.message,
+    params: params,
+    success: success,
+    errors: errors,
+    user: user,
     error: {}
   });
 });

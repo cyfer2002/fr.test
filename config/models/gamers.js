@@ -44,4 +44,34 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.put('/:idPlayers', function(req, res, next) {
+  var errors = checkBoxForm(req.body);
+  if (Object.keys(errors).length) {
+    req.session.params = req.body;
+    req.flash("danger", errors)
+    return res.send({errors : errors});
+  }
+  var errors = {};
+  var message;
+  var selectQuery = 'UPDATE PLAYERS set ? WHERE idPlayers = '+req.params.idPlayers;
+  console.log(req.body);
+  var cnx = pool.getConnection(function(err, cnx){
+    var sqlQuery = cnx.query(selectQuery, req.body);
+    sqlQuery.on("result", function(row) {
+      message = "Player Updated";
+    });
+    sqlQuery.on("end", function() {
+      cnx.destroy();
+      res.send({
+        message: message,
+        error: errors
+      });
+    });
+    sqlQuery.on("error", function(error) {
+      errors = error.message;
+      console.log(error);
+    });
+  });
+});
+
 module.exports = router;

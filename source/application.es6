@@ -16,12 +16,13 @@ import './application.styl';
 import ContactForm from './app/contact/contact_form';
 import PopupForm from './app/popup/popup_form';
 import LoginForm from './app/login/login_form';
+import Gallery from './app/gallery/gallery';
 
 $(() => {
   new ContactForm($('.contact-form form'));
   new PopupForm($('.popup-form form'));
   new LoginForm($('.login-form form'));
-
+  new Gallery($('.lightgallery'));
 
   // Menu
   $('.navbar').on('click', ' .dropdown-menu a', () => {

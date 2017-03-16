@@ -74,16 +74,18 @@
 	
 	var _login_form2 = _interopRequireDefault(_login_form);
 	
+	var _gallery = __webpack_require__(317);
+	
+	var _gallery2 = _interopRequireDefault(_gallery);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// Font-awesome
-	
-	
-	// Bootstrap
+	// Expose jQuery globally with webpack
 	(0, _expose$ExposeJQueryJquery2.default)(function () {
 	  new _contact_form2.default((0, _expose$ExposeJQueryJquery2.default)('.contact-form form'));
 	  new _popup_form2.default((0, _expose$ExposeJQueryJquery2.default)('.popup-form form'));
 	  new _login_form2.default((0, _expose$ExposeJQueryJquery2.default)('.login-form form'));
+	  new _gallery2.default((0, _expose$ExposeJQueryJquery2.default)('.lightgallery'));
 	
 	  // Menu
 	  (0, _expose$ExposeJQueryJquery2.default)('.navbar').on('click', ' .dropdown-menu a', function () {
@@ -91,7 +93,10 @@
 	  });
 	});
 	
-	// Expose jQuery globally with webpack
+	// Font-awesome
+	
+	
+	// Bootstrap
 
 /***/ },
 /* 1 */,
@@ -18790,6 +18795,24 @@
 	
 	exports.default = LoginUser;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(274)))
+
+/***/ },
+/* 317 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Gallery = function Gallery(form) {
+	  _classCallCheck(this, Gallery);
+	};
+	
+	exports.default = Gallery;
 
 /***/ }
 /******/ ]);

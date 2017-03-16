@@ -1,14 +1,13 @@
 doctype html
 html
   head
-    link(rel='stylesheet', href='/application.css')
     link(rel="icon", href="/images/favico.ico" type="image/x-icon")
-    script(src='/application.js')
+    link(href="css/lightgallery.min.css" rel="stylesheet")
     title Soirée Badminton
     // Bootstrap core CSS
     - if (environment === 'development')
-      link(href='/bundles/application.css', rel='stylesheet')
-      script(src='/bundles/application.js')
+      link(href='/application.css', rel='stylesheet')
+      script(src='/application.js')
     - else
       link(href='/assets/' + assetManifest.application.find(function(x) { return x.endsWith('.css'); }), rel='stylesheet')
       script(src='/assets/' + assetManifest.application.find(function(x) { return x.endsWith('.js'); }))
@@ -21,8 +20,15 @@ html
       li |
       li: a(href='/news') News
       li |
-      li: a(href='/gamers/') Participants
-      li |
+      - if (user != null)
+        li
+          a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+            | Administration
+            span.caret
+          ul.dropdown-menu(aria-labelledby="menu-item-login")
+            li: a(href="#GamersInsert") Ajout Participants
+            li: a(href="/gamers") Liste des participants
+        li |
       li: a(href='/pictures') Galerie Photos
       li |
       li: a(href='#about') A propos

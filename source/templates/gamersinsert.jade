@@ -1,0 +1,36 @@
+extend default
+
+block content
+  .gamersinsert
+    .container
+      .gamers-form
+        .bg
+          form(action="/gamers/" method="post" accept-charset="UTF-8" novalidate="novalidate")
+            - if (success)
+              .alert.alert-success.message-sent
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                  span(aria-hidden="true") &times;
+                | #{success}
+            - if (errors.error)
+              .alert.alert-danger.message-error
+                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                  span(aria-hidden="true") &times;
+                | #{errors.error}
+            .form-group(class=(errors.name ? "has-error" : ""))
+              input.form-control(type="text" name="name" placeholder="Nom complet" autofocus="1" value=params.name)
+              - if (errors.name)
+                span.help-block #{errors.name}
+            .form-group(class=(errors.email ? "has-error" : ""))
+              input.form-control(type="email" name="email" placeholder="Email" value=params.email)
+              - if (errors.email)
+                span.help-block #{errors.email}
+            .form-group(class=(errors.message ? "has-error" : ""))
+              label(for="message") Message&nbsp;
+              textarea.form-control(name="message" id="message" rows="4")
+                | #{params.message}
+              - if (errors.message)
+                span.help-block #{errors.message}
+            button.btn.btn-primary(type="submit")
+              .fa.fa-spinner.fa-pulse
+              | Envoyer
+            .clearfix
