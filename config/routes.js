@@ -45,6 +45,7 @@ router.get('/news', function (req, res, next) {
   var user = req.user;
   res.render('news', {
     title: "News",
+    id: "news",
     params: params,
     success: success,
     errors: errors,
@@ -67,6 +68,20 @@ router.get('/contact', recaptcha.middleware.render, function(req, res, next) {
     errors: errors,
     user: user,
     captcha: req.recaptcha
+  });
+});
+
+router.get('/gamersInsert', function (req, res, next) {
+  var success = req.session.success;
+  var errors = req.session.errors || { error: false };
+  var params = req.session.params || {};
+  var user = req.user;
+  res.render('gamersinsert', {
+    title: "insertion de joueurs",
+    params: params,
+    success: success,
+    errors: errors,
+    user: user
   });
 });
 
@@ -162,6 +177,7 @@ router.get('/pictures', function (req, res, next) {
 
   res.render('pictures', {
     title: "Galerie Photos",
+    id: "pictures",
     params: params,
     success: success,
     errors: errors,

@@ -9,7 +9,7 @@ export default class GamersForm {
     this.$form = $(form);
     if (!this.$form.length) return;
 
-    this.$inputs = 'username password'.split(' ').reduce((h, inputName) => {
+    this.$inputs = 'name lastname'.split(' ').reduce((h, inputName) => {
       h[inputName] = this.$form.find(`[name="${inputName}"]`);
       return h;
     }, {});
@@ -67,7 +67,8 @@ export default class GamersForm {
           Flash.danger(data.error, this.$form);
         }
         if (data.message) {
-          ReplaceFlash.success(data.message, this.$form);
+          $button.prop('disabled', false);
+          Flash.success(data.message, this.$form);
           this.$form[0].reset();
           LogInUser._display(data.user.username, $('[data-target="#login"]'));
           setTimeout(function () {

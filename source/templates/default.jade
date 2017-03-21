@@ -15,37 +15,44 @@ html
     .header
       h1.page-title #{title}
 
-    ul.nav
-      li: a(href='/') Home
-      li |
-      li: a(href='/news') News
-      li |
-      - if (user != null)
-        li
-          a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-            | Administration
-            span.caret
-          ul.dropdown-menu(aria-labelledby="menu-item-login")
-            li: a(href="#GamersInsert") Ajout Participants
-            li: a(href="/gamers") Liste des participants
-        li |
-      li: a(href='/pictures') Galerie Photos
-      li |
-      li: a(href='#about') A propos
-      li |
-      li: a(href='/contact') Contact
-      li.navbar-right
-        - if (user == null)
-          a(data-toggle='modal' data-target='#login') login
-        - else
-          a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="menu-item-login")
-            | #{user.username}&nbsp;
-            span.caret
-          ul(class="dropdown-menu" aria-labelledby="menu-item-login")
+    .navbar.navbar-default.navbar-static-top
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
             li
-              a(href='#') Profile
-            li
-              a(href='/logOut') Deconnexion
+              a(href="/") Home
+            li(class='news' === id ? "active" : "")
+              a(href="/news") News
+            li(class='pictures' === id ? "active" : "")
+              a(href="/pictures") Galerie Photos
+            li(class='about' === id ? "active" : "")
+              a(href="#about") A propos
+            li(class='contact' === id ? "active" : "")
+              a(href="/contact") Contact
+          ul.nav.navbar-nav.navbar-right
+            li.loginhead(class='logIn' === id ? "active" : "")
+              - if (user == null)
+                a(href="#login" data-toggle='modal' data-target='#login')
+                  | Login &nbsp;
+              - else
+                a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="menu-item-login")
+                  | #{user.username} &nbsp;
+                  span.caret
+                ul.dropdown-menu(aria-labelledby="menu-item-login")
+                  li
+                    a(href='#') Profile
+                  li
+                    a(href="/gamersInsert") Ajout Participants
+                  li
+                    a(href="/gamers") Liste des participants
+                  li
+                    a(href='/logOut') Deconnexion
 
     .main-content
       block content

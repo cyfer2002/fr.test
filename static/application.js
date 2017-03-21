@@ -74,18 +74,26 @@
 	
 	var _login_form2 = _interopRequireDefault(_login_form);
 	
+	var _gamers_form = __webpack_require__(318);
+	
+	var _gamers_form2 = _interopRequireDefault(_gamers_form);
+	
 	var _gallery = __webpack_require__(317);
 	
 	var _gallery2 = _interopRequireDefault(_gallery);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// Expose jQuery globally with webpack
+	// Font-awesome
+	
+	
+	// Bootstrap
 	(0, _expose$ExposeJQueryJquery2.default)(function () {
 	  new _contact_form2.default((0, _expose$ExposeJQueryJquery2.default)('.contact-form form'));
 	  new _popup_form2.default((0, _expose$ExposeJQueryJquery2.default)('.popup-form form'));
 	  new _login_form2.default((0, _expose$ExposeJQueryJquery2.default)('.login-form form'));
 	  new _gallery2.default((0, _expose$ExposeJQueryJquery2.default)('.lightgallery'));
+	  new _gamers_form2.default((0, _expose$ExposeJQueryJquery2.default)('.gamers-form form'));
 	
 	  // Menu
 	  (0, _expose$ExposeJQueryJquery2.default)('.navbar').on('click', ' .dropdown-menu a', function () {
@@ -93,10 +101,7 @@
 	  });
 	});
 	
-	// Font-awesome
-	
-	
-	// Bootstrap
+	// Expose jQuery globally with webpack
 
 /***/ },
 /* 1 */,
@@ -18212,7 +18217,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200,700);", ""]);
 	
 	// module
-	exports.push([module.id, ".contact h2 {\n  margin: 0 0 10px;\n}\n.contact a {\n  text-decoration: underline;\n}\n.contact a:hover {\n  text-decoration: none;\n}\n.contact .container {\n  position: relative;\n}\n.contact .contact-form {\n  position: relative;\n  z-index: 20;\n  width: 550px;\n  max-width: 100%;\n  padding: 0px;\n  margin-top: 0px;\n}\n.contact .contact-form .bg {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fff;\n  opacity: 0.85;\n  border-radius: 15px;\n  z-index: -1;\n}\n.contact .contact-form [type=\"submit\"] {\n  float: right;\n  width: 170px;\n  height: 56px;\n}\n.contact .contact-form [type=\"submit\"]:hover {\n  text-decoration: underline;\n}\n.contact .contact-form [type=\"submit\"] .fa {\n  margin-right: 10px;\n}\n.contact .contact-form [type=\"submit\"]:enabled .fa {\n  display: none;\n}\n.contact .captcha-wrapper {\n  overflow: hidden;\n  float: left;\n  height: 56px;\n  width: 300px;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n.contact .captcha-wrapper .g-recaptcha {\n  position: relative;\n  top: -9px;\n  left: -1px;\n}\n.news h3 {\n  margin: 0 0 8px;\n}\n.news img {\n  width: 100%;\n  text-align: center;\n}\n.login .modal {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  width: 50%;\n  max-width: 630px;\n  min-width: 320px;\n  height: auto;\n  z-index: 2000;\n  visibility: hidden;\n  background: #473542;\n  -webkit-backface-visibility: hidden;\n  -moz-backface-visibility: hidden;\n  backface-visibility: hidden;\n  -webkit-transform: translateX(-50%) translateY(-50%);\n  -moz-transform: translateX(-50%) translateY(-50%);\n  -ms-transform: translateX(-50%) translateY(-50%);\n  transform: translateX(-50%) translateY(-50%);\n}\n.login .modal-header {\n  text-align: center;\n  text-transform: uppercase;\n  background: #fa5858;\n  border-radius: 5px;\n}\n.login h2 {\n  margin: 0 0 10px;\n}\n.login a {\n  text-decoration: underline;\n}\n.login a:hover {\n  text-decoration: none;\n}\n.login .map {\n  position: fixed;\n  top: 51px;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 1;\n}\n.login .container {\n  position: relative;\n}\n.login .login-form {\n  position: relative;\n  z-index: 20;\n  width: 550px;\n  max-width: 100%;\n  padding: 30px;\n  margin-top: 30px;\n}\n.login .login-form .bg {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fff;\n  opacity: 0.85;\n  border-radius: 15px;\n  z-index: -1;\n}\n.login .login-form [type=\"submit\"] {\n  float: right;\n  width: 170px;\n  height: 56px;\n}\n.login .login-form [type=\"submit\"]:hover {\n  text-decoration: underline;\n}\n.login .login-form [type=\"submit\"] .fa {\n  margin-right: 10px;\n}\n.login .login-form [type=\"submit\"]:enabled .fa {\n  display: none;\n}\n@media (max-width: 768px) {\n  .login .login-form {\n    position: static;\n    padding: 0;\n    margin: 0;\n  }\n  .login .login-form .captcha-wrapper {\n    float: none;\n    width: 100%;\n    position: relative;\n  }\n  .login .login-form .captcha-wrapper:before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 299px;\n    z-index: 100;\n    right: 0;\n    bottom: 0;\n    background: #f9f9f9;\n  }\n  .login .login-form [type=\"submit\"] {\n    float: none;\n    width: 100%;\n    margin-top: 15px;\n  }\n  .login .bg {\n    display: none;\n  }\n}\n.thumbnails img {\n  height: 80px;\n  border: 4px solid #555;\n  padding: 1px;\n  margin: 0 10px 10px 0;\n}\n.thumbnails img:hover {\n  border: 4px solid #0cf;\n  cursor: pointer;\n}\n.preview img {\n  border: 4px solid #444;\n  padding: 1px;\n  width: 800px;\n}\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\nbody {\n  font-family: 'Source Code Pro', monospace;\n}\n.header {\n  background: url(\"http://aschbadminton.e-monsite.com/medias/static/themes/showroom_bootstrap/sport_badminton/badminton.jpg\");\n  background-position: center;\n}\n.header .page-title {\n  font-weight: 200;\n  font-size: 80px;\n  text-align: center;\n  padding: 100px;\n  text-transform: uppercase;\n  color: #fff;\n  margin: 0;\n  box-sizing: border-box;\n}\n.nav {\n  background: #fa5858;\n  text-align: center;\n  font-size: 20px;\n}\n.nav li {\n  display: inline-block;\n  color: #fff;\n}\n.nav .navbar-right {\n  margin: 0;\n  padding-right: 20px;\n}\n.nav a {\n  display: inline-block;\n  padding: 20px;\n  color: #fff;\n  text-decoration: none;\n}\n.nav a:hover {\n  background-color: #3ab795;\n  text-decoration: underline;\n}\n.main-content {\n  margin: 50px auto;\n  max-width: 600px;\n}\n.main-content p {\n  line-height: 1.6;\n  margin-bottom: 1.7em;\n}\n.footer {\n  margin: 50px auto;\n  max-width: 600px;\n  border-top: 1px solid #444;\n  padding: 20px 0;\n}\n.footer p {\n  color: #fa5858;\n  font-size: 12px;\n}\n", ""]);
+	exports.push([module.id, ".contact h2 {\n  margin: 0 0 10px;\n}\n.contact a {\n  text-decoration: underline;\n}\n.contact a:hover {\n  text-decoration: none;\n}\n.contact .container {\n  position: relative;\n}\n.contact .contact-form {\n  position: relative;\n  z-index: 20;\n  width: 550px;\n  max-width: 100%;\n  padding: 0px;\n  margin-top: 0px;\n}\n.contact .contact-form .bg {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fff;\n  opacity: 0.85;\n  border-radius: 15px;\n  z-index: -1;\n}\n.contact .contact-form [type=\"submit\"] {\n  float: right;\n  width: 170px;\n  height: 56px;\n}\n.contact .contact-form [type=\"submit\"]:hover {\n  text-decoration: underline;\n}\n.contact .contact-form [type=\"submit\"] .fa {\n  margin-right: 10px;\n}\n.contact .contact-form [type=\"submit\"]:enabled .fa {\n  display: none;\n}\n.contact .captcha-wrapper {\n  overflow: hidden;\n  float: left;\n  height: 56px;\n  width: 300px;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n.contact .captcha-wrapper .g-recaptcha {\n  position: relative;\n  top: -9px;\n  left: -1px;\n}\n.news h3 {\n  margin: 0 0 8px;\n}\n.news img {\n  width: 100%;\n  text-align: center;\n}\n.login .modal {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  width: 50%;\n  max-width: 630px;\n  min-width: 320px;\n  height: auto;\n  z-index: 2000;\n  visibility: hidden;\n  background: #473542;\n  -webkit-backface-visibility: hidden;\n  -moz-backface-visibility: hidden;\n  backface-visibility: hidden;\n  -webkit-transform: translateX(-50%) translateY(-50%);\n  -moz-transform: translateX(-50%) translateY(-50%);\n  -ms-transform: translateX(-50%) translateY(-50%);\n  transform: translateX(-50%) translateY(-50%);\n}\n.login .modal-header {\n  text-align: center;\n  text-transform: uppercase;\n  background: #fa5858;\n  border-radius: 5px;\n}\n.login h2 {\n  margin: 0 0 10px;\n}\n.login a {\n  text-decoration: underline;\n}\n.login a:hover {\n  text-decoration: none;\n}\n.login .map {\n  position: fixed;\n  top: 51px;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 1;\n}\n.login .container {\n  position: relative;\n}\n.login .login-form {\n  position: relative;\n  z-index: 20;\n  width: 550px;\n  max-width: 100%;\n  padding: 30px;\n  margin-top: 30px;\n}\n.login .login-form .bg {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fff;\n  opacity: 0.85;\n  border-radius: 15px;\n  z-index: -1;\n}\n.login .login-form [type=\"submit\"] {\n  float: right;\n  width: 170px;\n  height: 56px;\n}\n.login .login-form [type=\"submit\"]:hover {\n  text-decoration: underline;\n}\n.login .login-form [type=\"submit\"] .fa {\n  margin-right: 10px;\n}\n.login .login-form [type=\"submit\"]:enabled .fa {\n  display: none;\n}\n@media (max-width: 768px) {\n  .login .login-form {\n    position: static;\n    padding: 0;\n    margin: 0;\n  }\n  .login .login-form .captcha-wrapper {\n    float: none;\n    width: 100%;\n    position: relative;\n  }\n  .login .login-form .captcha-wrapper:before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 299px;\n    z-index: 100;\n    right: 0;\n    bottom: 0;\n    background: #f9f9f9;\n  }\n  .login .login-form [type=\"submit\"] {\n    float: none;\n    width: 100%;\n    margin-top: 15px;\n  }\n  .login .bg {\n    display: none;\n  }\n}\n.thumbnails img {\n  height: 80px;\n  border: 4px solid #555;\n  padding: 1px;\n  margin: 0 10px 10px 0;\n}\n.thumbnails img:hover {\n  border: 4px solid #0cf;\n  cursor: pointer;\n}\n.preview img {\n  border: 4px solid #444;\n  padding: 1px;\n  width: 800px;\n}\n.gamersinsert {\n  h2: margin 0 0 10px;\n}\n.gamersinsert a text-decoration underline:hover {\n  text-decoration: none;\n}\n.gamersinsert .container {\n  position: relative;\n}\n.gamersinsert .gamers-form {\n  position: relative;\n  z-index: 20;\n  width: 550px;\n  max-width: 100%;\n  padding: 0px;\n  margin-top: 0px;\n}\n.gamersinsert .gamers-form .bg {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fff;\n  opacity: 0.85;\n  border-radius: 15px;\n  z-index: -1;\n}\n.gamersinsert .gamers-form [type=\"submit\"] {\n  float: right;\n  width: 170px;\n  height: 56px;\n}\n.gamersinsert .gamers-form [type=\"submit\"]:hover {\n  text-decoration: underline;\n}\n.gamersinsert .gamers-form [type=\"submit\"] .fa {\n  margin-right: 10px;\n}\n.gamersinsert .gamers-form [type=\"submit\"]:enabled .fa {\n  display: none;\n}\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\nbody {\n  font-family: 'Source Code Pro', monospace;\n}\n.header {\n  background: url(\"http://aschbadminton.e-monsite.com/medias/static/themes/showroom_bootstrap/sport_badminton/badminton.jpg\");\n  background-position: center;\n}\n.header .page-title {\n  font-weight: 200;\n  font-size: 80px;\n  text-align: center;\n  padding: 100px;\n  text-transform: uppercase;\n  color: #fff;\n  margin: 0;\n  box-sizing: border-box;\n}\n.navbar-header {\n  padding-left: 3%;\n  background: #fa5858;\n  text-align: center;\n  font-size: 20px;\n}\n.navbar-header .navbar-brand {\n  padding: 5px 15px 5px 0;\n}\n.navbar-header .logo {\n  height: 100%;\n}\n.navbar-default .navbar-nav li a {\n  color: #f5f5f5;\n}\n.navbar-default .navbar-nav .dropdown-menu li a {\n  color: #000;\n}\n.navbar {\n  background: #fa5858;\n  font-size: 20px;\n}\n.navbar .item-services a {\n  float: left;\n  padding-right: 0;\n}\n.navbar .item-services a + a {\n  padding-right: inherit;\n}\n.navbar li {\n  display: inline-block;\n}\n.navbar .navbar-right {\n  margin: 0;\n}\n.navbar a {\n  display: inline-block;\n  padding: 20px;\n  color: #fff;\n  text-decoration: none;\n}\n.navbar a:hover {\n  background-color: #3ab795;\n  text-decoration: underline;\n}\n.main-content {\n  margin: 50px auto;\n  max-width: 600px;\n}\n.main-content p {\n  line-height: 1.6;\n  margin-bottom: 1.7em;\n}\n.footer {\n  margin: 50px auto;\n  max-width: 600px;\n  border-top: 1px solid #444;\n  padding: 20px 0;\n}\n.footer p {\n  color: #fa5858;\n  font-size: 12px;\n}\n@media (max-width: 992px) {\n  .navbar a {\n    font-size: 13px;\n  }\n}\n", ""]);
 	
 	// exports
 
@@ -18785,7 +18790,7 @@
 	  }, {
 	    key: '_display',
 	    value: function _display(username, parent) {
-	      var html = '\n    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="menu-item-login"> ' + username + ' &nbsp;\n      <span class="caret"></span></a>\n    <ul class="dropdown-menu" aria-labelledby="menu-item-login">\n      <li>\n        <a href=\'#\'>Profile</a>\n      </li>\n      <li>\n        <a href=\'/logOut\'>Deconnexion</a> \n      </li>\n    </ul>\n    ';
+	      var html = '\n    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="menu-item-login"> ' + username + '&nbsp;\n      <span class="caret"></span></a>\n    <ul class="dropdown-menu" aria-labelledby="menu-item-login">\n      <li>\n        <a href=\'#\'>Profile</a>\n      </li>\n      <li>\n          <a href="/gamersInsert">Ajout Participants</a>\n      </li>\n      <li>\n         <a href="/gamers">Liste des participants</a>\n      </li>\n      <li>\n        <a href=\'/logOut\'>Deconnexion</a> \n      </li>\n    </ul>\n    ';
 	      (parent ? $(parent) : this.element()).replaceWith($(html));
 	    }
 	  }]);
@@ -18813,6 +18818,157 @@
 	};
 	
 	exports.default = Gallery;
+
+/***/ },
+/* 318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _check_form = __webpack_require__(319);
+	
+	var _check_form2 = _interopRequireDefault(_check_form);
+	
+	var _flash = __webpack_require__(310);
+	
+	var _flash2 = _interopRequireDefault(_flash);
+	
+	var _replaceflash = __webpack_require__(315);
+	
+	var _replaceflash2 = _interopRequireDefault(_replaceflash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ERROR_CLASS = 'has-error';
+	
+	var GamersForm = function () {
+	  function GamersForm(form) {
+	    var _this = this;
+	
+	    _classCallCheck(this, GamersForm);
+	
+	    this.$form = $(form);
+	    if (!this.$form.length) return;
+	
+	    this.$inputs = 'name lastname'.split(' ').reduce(function (h, inputName) {
+	      h[inputName] = _this.$form.find('[name="' + inputName + '"]');
+	      return h;
+	    }, {});
+	
+	    this.$form.find('.message-sent, .message-error').delay(5000).fadeOut(400);
+	    this.$form.on('submit', function (e) {
+	      return _this.onSubmit(e);
+	    });
+	  }
+	
+	  _createClass(GamersForm, [{
+	    key: 'resetErrors',
+	    value: function resetErrors() {
+	      this.$form.find('.form-group').removeClass(ERROR_CLASS).end().find('.help-block').remove();
+	    }
+	  }, {
+	    key: 'onSubmit',
+	    value: function onSubmit(e) {
+	      var _this2 = this;
+	
+	      // Stop submit event
+	      e.preventDefault();
+	
+	      // Remove errors from previous submit call
+	      this.resetErrors();
+	
+	      // Check if user filled the form correctly
+	      var errors = (0, _check_form2.default)(this.inputValues);
+	
+	      // Error found
+	      if (Object.keys(errors).length) {
+	        // Display errors
+	        for (var inputName in errors) {
+	          this.displayInputError(inputName, errors[inputName]);
+	        }
+	        // Give focus to the first input with an error
+	        return this.$form.find('.has-error:first').find('input,select,textarea').focus();
+	      }
+	
+	      // Display spinner
+	      var $button = this.$form.find('[type="submit"]').prop('disabled', true);
+	
+	      // Ajax call
+	      $.ajax({
+	        url: this.$form.attr('action'),
+	        method: this.$form.attr('method'),
+	        data: this.$form.serialize(),
+	        dataType: 'JSON',
+	        success: function success(data) {
+	          if (data.error) {
+	            _flash2.default.danger(data.error, _this2.$form);
+	          }
+	          if (data.message) {
+	            $button.prop('disabled', false);
+	            _flash2.default.success(data.message, _this2.$form);
+	            _this2.$form[0].reset();
+	            LogInUser._display(data.user.username, $('[data-target="#login"]'));
+	            setTimeout(function () {
+	              $('.modal').modal('hide');
+	            }, 500);
+	          }
+	        },
+	        complete: function complete() {
+	          $button.prop('disabled', false);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'displayInputError',
+	    value: function displayInputError(inputName, error) {
+	      this.$inputs[inputName].closest('.form-group').addClass(ERROR_CLASS).end() // Add class on form-group element
+	      .after($('<span>', { class: 'help-block' }).text(error)); // Add an help-block element with the error desc
+	    }
+	  }, {
+	    key: 'inputValues',
+	    get: function get() {
+	      var values = {};
+	      for (var inputName in this.$inputs) {
+	        values[inputName] = this.$inputs[inputName].val();
+	      }
+	      return values;
+	    }
+	  }]);
+	
+	  return GamersForm;
+	}();
+	
+	exports.default = GamersForm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(274)))
+
+/***/ },
+/* 319 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = checkForm;
+	function checkForm(inputs) {
+	  var errors = {};
+	  if (!inputs.name.trim()) {
+	    errors.name = 'Ce champ est requis';
+	  }
+	  if (!inputs.lastname.trim()) {
+	    errors.lastname = 'Ce champ est requis';
+	  }
+	  return errors;
+	}
 
 /***/ }
 /******/ ]);
