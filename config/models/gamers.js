@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
     }
     var sqlQuery = cnx.query(selectQuery);
     sqlQuery.on("row", function(row) {
-      listGamers[j] = {id : row.id, name : row.name, lastname : row.lastname};
+      listGamers[j] = {id : row.id, name : row.name, lastname : row.lastname, email : row.email, birthday : row.birthday};
       j++;
     });
     sqlQuery.on("end", function() {
@@ -91,13 +91,13 @@ router.post('/', function(req, res, next) {
     return res.send({errors : errors});
   }
   errors = {};
-  var selectQuery = 'INSERT INTO gamers (name, lastname) VALUES (($1), ($2));';
+  var selectQuery = 'INSERT INTO gamers (name, lastname, email, birthday) VALUES (($1), ($2), ($3), ($4));';
 
   var cnx = pool.connect(function(err, cnx, done){
     if(err) {
       return console.error('error fetching client from pool', err);
     }
-    var sqlQuery = cnx.query(selectQuery, [req.body.name, req.body.lastname]);
+    var sqlQuery = cnx.query(selectQuery, [req.body.name, req.body.lastname, req.body.email, req.body.birthday]);
     sqlQuery.on("row", function(row) {
     });
     sqlQuery.on("end", function() {

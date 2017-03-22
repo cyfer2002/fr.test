@@ -27,6 +27,14 @@ block content
               input.form-control(type="text" name="lastname" placeholder="Prénom" value=params.lastname)
               - if (errors.lastname)
                 span.help-block #{errors.lastname}
+            .form-group(class=(errors.email ? "has-error" : ""))
+              input.form-control(type="text" name="email" placeholder="E-mail" value=params.email)
+              - if (errors.email)
+                span.help-block #{errors.email}
+            .form-group(class=(errors.birthday ? "has-error" : ""))
+              input.form-control(type="date" name="birthday" placeholder="Date de naissance" value=params.birthday)
+              - if (errors.birthday)
+                span.help-block #{errors.birthday}
             button.btn.btn-primary(type="submit")
               .fa.fa-spinner.fa-pulse
               | Envoyer

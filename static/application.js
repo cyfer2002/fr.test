@@ -18858,7 +18858,7 @@
 	    this.$form = $(form);
 	    if (!this.$form.length) return;
 	
-	    this.$inputs = 'name lastname'.split(' ').reduce(function (h, inputName) {
+	    this.$inputs = 'name lastname email birthday'.split(' ').reduce(function (h, inputName) {
 	      h[inputName] = _this.$form.find('[name="' + inputName + '"]');
 	      return h;
 	    }, {});
@@ -18959,6 +18959,8 @@
 	  value: true
 	});
 	exports.default = checkForm;
+	var REG_EMAIL = /^[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+	
 	function checkForm(inputs) {
 	  var errors = {};
 	  if (!inputs.name.trim()) {
@@ -18966,6 +18968,11 @@
 	  }
 	  if (!inputs.lastname.trim()) {
 	    errors.lastname = 'Ce champ est requis';
+	  }
+	  if (!inputs.email.trim()) {
+	    errors.email = 'Ce champ est requis';
+	  } else if (!REG_EMAIL.test(inputs.email)) {
+	    errors.email = 'Addresse email invalide';
 	  }
 	  return errors;
 	}

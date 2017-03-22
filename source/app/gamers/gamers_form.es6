@@ -9,7 +9,7 @@ export default class GamersForm {
     this.$form = $(form);
     if (!this.$form.length) return;
 
-    this.$inputs = 'name lastname'.split(' ').reduce((h, inputName) => {
+    this.$inputs = 'name lastname email birthday'.split(' ').reduce((h, inputName) => {
       h[inputName] = this.$form.find(`[name="${inputName}"]`);
       return h;
     }, {});

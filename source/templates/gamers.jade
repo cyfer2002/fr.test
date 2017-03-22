@@ -1,16 +1,23 @@
 extend default
 
 block content
-  p.
-    Liste des participants
-  table.table.table-striped
-    tbody
-      tr
-        td Id
-        td Nom
-        td Prénom
-      each gamer in gamers
+  - if (user == null)
+    span.help-block Merci de vous authentifier
+  - else
+    p.
+      Liste des participants
+    table.table.table-striped
+      tbody
         tr
-          td #{gamer.id}
-          td #{gamer.name}
-          td #{gamer.lastname}
+          td Id
+          td Nom
+          td Prénom
+          td E-mail
+          td Date de naissance
+        each gamer in gamers
+          tr
+            td #{gamer.id}
+            td #{gamer.name}
+            td #{gamer.lastname}
+            td #{gamer.email}
+            td #{gamer.birthday}
